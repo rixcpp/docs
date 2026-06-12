@@ -566,3 +566,40 @@ html:not(.dark) .rdh-card:hover {
   background: rgba(0, 97, 255, 0.08) !important;
   border-color: rgba(0, 97, 255, 0.22) !important;
 }
+/* ============================================================
+   FINAL — sidebar text should not become blue
+   ============================================================ */
+
+.VPSidebarItem .text,
+.VPSidebarItem.level-0 .text,
+.VPSidebarItem.level-1 .text,
+.VPSidebarItem.level-2 .text,
+.VPSidebarItem.level-3 .text,
+.VPSidebarItem.level-4 .text,
+.VPSidebarItem.level-5 .text {
+  color: var(--vp-c-text-2) !important;
+}
+
+/* Section titles stay readable */
+.VPSidebarItem.level-0 > .item > .link > .text,
+.VPSidebarGroup .title {
+  color: var(--vp-c-text-1) !important;
+}
+
+/* Only the real active page gets a small background, not blue text everywhere */
+.VPSidebarItem.is-active > .item > .link {
+  background: rgba(0, 97, 255, 0.1) !important;
+}
+
+.VPSidebarItem.is-active > .item > .link > .text {
+  color: var(--vp-c-text-1) !important;
+}
+
+/* Parent groups with active children should not turn blue */
+.VPSidebarItem.has-active .text {
+  color: var(--vp-c-text-2) !important;
+}
+
+.VPSidebarItem.has-active.level-0 > .item > .link > .text {
+  color: var(--vp-c-text-1) !important;
+}

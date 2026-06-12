@@ -22,30 +22,30 @@ int main(){
 const features = [
   {
     title: "Unified facade",
-    desc: "One clean rix.* entry point for the userland packages you install.",
+    desc: "Use one clean rix.* entry point for the Rix packages mounted in your project.",
     icon: "facade",
-    href: "/guides/facade",
+    href: "/facade/",
     tag: "API",
   },
   {
     title: "Independent packages",
-    desc: "Use csv, debug, auth, pdf, and future packages without pulling the full layer.",
+    desc: "Use auth, csv, debug, pdf, and future packages independently when you do not need the full facade.",
     icon: "packages",
     href: "/packages/",
     tag: "Packages",
   },
   {
     title: "Built on Vix.cpp",
-    desc: "Rix does not replace Vix. It adds application-level libraries on top of it.",
+    desc: "Rix does not replace Vix.cpp. It adds application-level libraries on top of the Vix runtime and workflow.",
     icon: "runtime",
-    href: "/guides/rix-and-vix",
-    tag: "Vix",
+    href: "/guides/rix-and-vixcpp",
+    tag: "Vix.cpp",
   },
   {
-    title: "Stable naming",
-    desc: "Every package follows the same model: @rix/name, <rix/name.hpp>, rix.name.",
+    title: "Stable package model",
+    desc: "Every package follows the same model: @rix/name, <rix/name.hpp>, rixlib::name, and rix.name.",
     icon: "naming",
-    href: "/guides/package-rules",
+    href: "/guides/package-model",
     tag: "Design",
   },
 ];
@@ -145,7 +145,7 @@ function iconPath(name) {
         foundations.
       </p>
       <div class="rdh-actions">
-        <a class="rdh-btn rdh-btn--primary" href="/guides/getting-started">
+        <a class="rdh-btn rdh-btn--primary" href="/getting-started/">
           Start with Rix
           <svg viewBox="0 0 16 16" width="14" height="14" fill="none">
             <path
