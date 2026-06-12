@@ -603,3 +603,14 @@ html:not(.dark) .rdh-card:hover {
 .VPSidebarItem.has-active.level-0 > .item > .link > .text {
   color: var(--vp-c-text-1) !important;
 }
+/* ============================================================
+   FINAL — reduce desktop doc top spacing
+   ============================================================ */
+
+@media (min-width: 1280px) {
+  .VPDoc.has-sidebar.has-aside > .container > .content {
+    min-width: 0 !important;
+    padding-top: 24px !important;
+    padding-right: 0 !important;
+  }
+}
