@@ -11,26 +11,27 @@ const showBanner = ref(true);
 const isDark = ref(true);
 
 const navLinks = [
-  { text: "Guides", href: "/guides/build-rest-api" },
-  { text: "Templates", href: "/templates/" },
-  { text: "API", href: "/api/index" },
-  { text: "Modules", href: "/modules/core/" },
-  { text: "Registry", href: "https://registry.vixcpp.com" },
+  { text: "Guides", href: "/guides/getting-started" },
+  { text: "Packages", href: "/packages/" },
+  { text: "API", href: "/api/" },
+  { text: "Examples", href: "/examples/" },
+  { text: "Registry", href: "https://registry.vixcpp.com/browse" },
 ];
 
 const footerLinks = [
   { text: "Docs", href: "/" },
-  { text: "Guides", href: "/guides/build-rest-api" },
-  { text: "API", href: "/api/index" },
-  { text: "Modules", href: "/modules/core/" },
-  { text: "Registry", href: "https://registry.vixcpp.com" },
-  { text: "GitHub", href: "https://github.com/vixcpp/vix" },
+  { text: "Guides", href: "/guides/getting-started" },
+  { text: "Packages", href: "/packages/" },
+  { text: "API", href: "/api/" },
+  { text: "Examples", href: "/examples/" },
+  { text: "Registry", href: "https://registry.vixcpp.com/browse" },
+  { text: "GitHub", href: "https://github.com/rixcpp/rix" },
 ];
 
 const socials = [
   {
     label: "GitHub",
-    href: "https://github.com/vixcpp/vix",
+    href: "https://github.com/rixcpp/rix",
     icon: `<path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.2 9.2 0 0 1 12 7.07c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.5-.01 2.84 0 .27.18.59.69.48A10.04 10.04 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>`,
   },
   {
@@ -91,8 +92,8 @@ const toggleTheme = () => {
 const syncHeaderState = async () => {
   await nextTick();
 
-  document.body.classList.toggle("vix-banner-visible", showBanner.value);
-  document.body.classList.toggle("vix-banner-hidden", !showBanner.value);
+  document.body.classList.toggle("rix-banner-visible", showBanner.value);
+  document.body.classList.toggle("rix-banner-hidden", !showBanner.value);
 };
 
 const closeBanner = () => {
@@ -118,72 +119,79 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  document.body.classList.remove("vix-banner-visible", "vix-banner-hidden");
+  document.body.classList.remove("rix-banner-visible", "rix-banner-hidden");
 });
 </script>
 
 <template>
-  <header class="vix-nav">
-    <div v-if="showBanner" class="vix-nav__banner">
-      <span class="vix-nav__banner-mark" aria-hidden="true">
-        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <header class="rix-nav">
+    <div v-if="showBanner" class="rix-nav__banner">
+      <span class="rix-nav__banner-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
+            <radialGradient id="rix-banner-bg" cx="50%" cy="42%" r="70%">
+              <stop offset="0%" stop-color="#141922" />
+              <stop offset="58%" stop-color="#080B10" />
+              <stop offset="100%" stop-color="#030509" />
+            </radialGradient>
+
             <linearGradient
-              id="vix-banner-left"
-              x1="5"
-              y1="6"
-              x2="18"
-              y2="30"
+              id="rix-banner-white"
+              x1="18"
+              y1="17"
+              x2="47"
+              y2="48"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0%" stop-color="#d4fcd4" />
-              <stop offset="55%" stop-color="#4ade80" />
-              <stop offset="100%" stop-color="#22c55e" />
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#e9eef5" />
             </linearGradient>
 
             <linearGradient
-              id="vix-banner-right"
-              x1="31"
-              y1="6"
-              x2="18"
-              y2="30"
+              id="rix-banner-blue"
+              x1="28"
+              y1="24"
+              x2="37"
+              y2="33"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0%" stop-color="#22c55e" />
-              <stop offset="100%" stop-color="#15803d" />
+              <stop offset="0%" stop-color="#1684ff" />
+              <stop offset="100%" stop-color="#0061ff" />
             </linearGradient>
           </defs>
 
-          <polygon points="5,6 12,6 18,28 14,28" fill="url(#vix-banner-left)" />
-          <polygon
-            points="31,6 24,6 18,28 22,28"
-            fill="url(#vix-banner-right)"
-          />
-          <line
-            x1="9"
-            y1="16"
-            x2="13.5"
-            y2="29"
-            stroke="#bbf7d0"
-            stroke-width="1.1"
+          <rect width="64" height="64" rx="16" fill="url(#rix-banner-bg)" />
+
+          <g
+            stroke="url(#rix-banner-white)"
+            stroke-width="5.8"
             stroke-linecap="round"
-            opacity="0.7"
-          />
+            stroke-linejoin="round"
+          >
+            <path
+              d="M23 21H36.5C43 21 48 25.8 48 32.2C48 36.4 45.8 40 42.4 42.2"
+            />
+            <path d="M21.5 37L40.5 46.2" />
+            <path d="M18 45L28.5 50" />
+          </g>
+
+          <circle cx="32.3" cy="30.8" r="4.2" fill="url(#rix-banner-blue)" />
         </svg>
       </span>
 
-      <span>Vix.cpp v2.6.0 is here</span>
+      <span>Rix is the official package layer for Vix.cpp</span>
+
       <a
-        href="https://blog.vixcpp.com/"
+        href="https://registry.vixcpp.com/ns/rix"
         target="_blank"
         rel="noreferrer"
-        aria-label="Read the Vix.cpp blog"
+        aria-label="Browse Rix packages in the Vix.cpp registry"
       >
-        Read the blog
+        Browse packages
       </a>
 
       <button
-        class="vix-nav__banner-close"
+        class="rix-nav__banner-close"
         type="button"
         aria-label="Close announcement"
         @click="closeBanner"
@@ -192,19 +200,76 @@ onBeforeUnmount(() => {
       </button>
     </div>
 
-    <div class="vix-nav__bar">
-      <div class="vix-nav__inner">
-        <a class="vix-nav__brand" href="/" aria-label="Vix.cpp Documentation">
-          <span class="vix-nav__brand-name">Vix.cpp</span>
-          <span class="vix-nav__slash">/</span>
-          <span class="vix-nav__docs">Docs</span>
+    <div class="rix-nav__bar">
+      <div class="rix-nav__inner">
+        <a class="rix-nav__brand" href="/" aria-label="Rix Documentation">
+          <span class="rix-nav__brand-mark" aria-hidden="true">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <radialGradient id="rix-brand-bg" cx="50%" cy="42%" r="70%">
+                  <stop offset="0%" stop-color="#141922" />
+                  <stop offset="58%" stop-color="#080B10" />
+                  <stop offset="100%" stop-color="#030509" />
+                </radialGradient>
+
+                <linearGradient
+                  id="rix-brand-white"
+                  x1="18"
+                  y1="17"
+                  x2="47"
+                  y2="48"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="100%" stop-color="#e9eef5" />
+                </linearGradient>
+
+                <linearGradient
+                  id="rix-brand-blue"
+                  x1="28"
+                  y1="24"
+                  x2="37"
+                  y2="33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stop-color="#1684ff" />
+                  <stop offset="100%" stop-color="#0061ff" />
+                </linearGradient>
+              </defs>
+
+              <rect width="64" height="64" rx="16" fill="url(#rix-brand-bg)" />
+
+              <g
+                stroke="url(#rix-brand-white)"
+                stroke-width="5.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M23 21H36.5C43 21 48 25.8 48 32.2C48 36.4 45.8 40 42.4 42.2"
+                />
+                <path d="M21.5 37L40.5 46.2" />
+                <path d="M18 45L28.5 50" />
+              </g>
+
+              <circle cx="32.3" cy="30.8" r="4.2" fill="url(#rix-brand-blue)" />
+            </svg>
+          </span>
+
+          <span class="rix-nav__brand-name">Rix</span>
+          <span class="rix-nav__slash">/</span>
+          <span class="rix-nav__docs">Docs</span>
         </a>
 
-        <nav class="vix-nav__links" aria-label="Main navigation">
+        <nav class="rix-nav__links" aria-label="Main navigation">
           <a
             v-for="link in navLinks"
             :key="link.text"
-            :class="['vix-nav__link', { 'is-active': isActiveLink(link.href) }]"
+            :class="['rix-nav__link', { 'is-active': isActiveLink(link.href) }]"
             :href="link.href"
             :target="link.href.startsWith('http') ? '_blank' : undefined"
             :rel="link.href.startsWith('http') ? 'noreferrer' : undefined"
@@ -213,9 +278,9 @@ onBeforeUnmount(() => {
           </a>
         </nav>
 
-        <div class="vix-nav__right">
+        <div class="rix-nav__right">
           <button
-            class="vix-nav__theme"
+            class="rix-nav__theme"
             type="button"
             :aria-label="
               isDark ? 'Switch to light theme' : 'Switch to dark theme'
@@ -247,14 +312,14 @@ onBeforeUnmount(() => {
           <a
             v-for="item in socials"
             :key="item.label"
-            class="vix-nav__icon"
+            class="rix-nav__icon"
             :href="item.href"
             target="_blank"
             rel="noreferrer"
             :aria-label="item.label"
           >
             <svg
-              class="vix-nav__social-svg"
+              class="rix-nav__social-svg"
               viewBox="0 0 24 24"
               aria-hidden="true"
               v-html="item.icon"
@@ -262,7 +327,7 @@ onBeforeUnmount(() => {
           </a>
 
           <button
-            class="vix-nav__search"
+            class="rix-nav__search"
             type="button"
             aria-label="Search"
             @click="openSearch"
@@ -280,53 +345,57 @@ onBeforeUnmount(() => {
     </div>
   </header>
 
-  <Layout>
-    <template #doc-before>
-      <Breadcrumb />
-    </template>
+  <div class="rix-doc-shell">
+    <Layout>
+      <template #doc-before>
+        <Breadcrumb />
+      </template>
 
-    <template #layout-bottom>
-      <footer class="vix-footer" role="contentinfo">
-        <div class="vix-footer-inner">
-          <div class="vix-footer-brand">
-            <span class="vix-footer-name">Vix.cpp</span>
-            <span class="vix-footer-desc">
-              Modern C++ runtime and developer toolkit.
-            </span>
+      <template #layout-bottom>
+        <footer class="rix-footer" role="contentinfo">
+          <div class="rix-footer-inner">
+            <div class="rix-footer-brand">
+              <span class="rix-footer-name">Rix</span>
+              <span class="rix-footer-desc">
+                Official package namespace for optional Vix.cpp libraries.
+              </span>
+            </div>
+
+            <nav class="rix-footer-nav" aria-label="Footer navigation">
+              <a
+                v-for="link in footerLinks"
+                :key="link.text"
+                class="rix-footer-link"
+                :href="link.href"
+                :target="link.href.startsWith('http') ? '_blank' : undefined"
+                :rel="link.href.startsWith('http') ? 'noreferrer' : undefined"
+              >
+                {{ link.text }}
+              </a>
+            </nav>
           </div>
 
-          <nav class="vix-footer-nav" aria-label="Footer navigation">
-            <a
-              v-for="link in footerLinks"
-              :key="link.text"
-              class="vix-footer-link"
-              :href="link.href"
-              :target="link.href.startsWith('http') ? '_blank' : undefined"
-              :rel="link.href.startsWith('http') ? 'noreferrer' : undefined"
-            >
-              {{ link.text }}
-            </a>
-          </nav>
-        </div>
-
-        <div class="vix-footer-meta">
-          <span>MIT License</span>
-          <span>Copyright © 2026 Vix.cpp</span>
-          <span>Built by Softadastra</span>
-        </div>
-      </footer>
-    </template>
-  </Layout>
+          <div class="rix-footer-meta">
+            <span>MIT License</span>
+            <span>Copyright © 2026 Rix</span>
+            <span>Built for the Vix.cpp ecosystem</span>
+          </div>
+        </footer>
+      </template>
+    </Layout>
+  </div>
 </template>
 
 <style>
 :root {
-  --vix-doc-sidebar-width: 300px;
+  --rix-doc-sidebar-width: 300px;
+  --rix-accent: #0061ff;
+  --rix-accent-soft: rgba(0, 97, 255, 0.16);
 }
 
 @media (min-width: 1440px) {
   :root {
-    --vix-doc-sidebar-width: 320px;
+    --rix-doc-sidebar-width: 320px;
   }
 }
 
@@ -343,11 +412,10 @@ onBeforeUnmount(() => {
 }
 
 /* ============================================================
-   Vix.cpp custom docs header
-   Same background as docs, fully responsive
+   Rix custom docs header
    ============================================================ */
 
-.vix-nav {
+.rix-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -359,16 +427,18 @@ onBeforeUnmount(() => {
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.vix-nav__banner {
+.rix-nav__banner {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 40px;
+  gap: 7px;
+  min-height: 42px;
   padding: 8px 56px;
   color: var(--vp-c-text-1);
-  background: var(--vp-c-bg) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 97, 255, 0.14), transparent 42%),
+    var(--vp-c-bg) !important;
   border-bottom: 1px solid var(--vp-c-divider);
   font-size: 13px;
   font-weight: 650;
@@ -376,31 +446,38 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 
-.vix-nav__banner a {
-  color: #4ade80;
+.rix-nav__banner a {
+  color: #1684ff !important;
   font-weight: 760;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
   white-space: nowrap;
 }
 
-.vix-nav__banner-mark {
+.rix-nav__banner a:hover {
+  color: #5ea8ff !important;
+  text-decoration: underline !important;
+}
+
+.rix-nav__banner-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 21px;
-  height: 21px;
+  width: 24px;
+  height: 24px;
   margin-right: 3px;
   flex-shrink: 0;
 }
 
-.vix-nav__banner-mark svg {
+.rix-nav__banner-mark svg {
   display: block;
-  width: 21px;
-  height: 21px;
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
 }
 
-.vix-nav__banner-close {
+.rix-nav__banner-close {
   position: absolute;
   top: 50%;
   right: 16px;
@@ -417,22 +494,22 @@ onBeforeUnmount(() => {
   transform: translateY(-50%);
 }
 
-.vix-nav__banner-close:hover {
+.rix-nav__banner-close:hover {
   color: var(--vp-c-text-1);
   background: var(--vp-c-bg-soft);
 }
 
-.vix-nav__banner-close span {
+.rix-nav__banner-close span {
   font-size: 24px;
   line-height: 1;
 }
 
-.vix-nav__bar {
+.rix-nav__bar {
   height: 60px;
   background: var(--vp-c-bg) !important;
 }
 
-.vix-nav__inner {
+.rix-nav__inner {
   display: grid;
   grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
   align-items: center;
@@ -444,7 +521,7 @@ onBeforeUnmount(() => {
   background: var(--vp-c-bg) !important;
 }
 
-.vix-nav__brand {
+.rix-nav__brand {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -454,31 +531,45 @@ onBeforeUnmount(() => {
   white-space: nowrap;
 }
 
-.vix-nav__brand:hover {
+.rix-nav__brand:hover {
   color: var(--vp-c-text-1);
   text-decoration: none;
 }
 
-.vix-nav__brand-name {
+.rix-nav__brand-mark {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.rix-nav__brand-mark svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.24));
+}
+
+.rix-nav__brand-name {
   font-size: 17px;
-  font-weight: 760;
+  font-weight: 780;
   letter-spacing: -0.035em;
 }
 
-.vix-nav__slash {
+.rix-nav__slash {
   color: var(--vp-c-text-2);
   font-size: 18px;
   font-weight: 500;
 }
 
-.vix-nav__docs {
+.rix-nav__docs {
   color: var(--vp-c-text-1);
   font-size: 17px;
   font-weight: 720;
   letter-spacing: -0.03em;
 }
 
-.vix-nav__links {
+.rix-nav__links {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -487,7 +578,8 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
-.vix-nav__link {
+.rix-nav__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   color: var(--vp-c-text-2);
@@ -501,17 +593,17 @@ onBeforeUnmount(() => {
     background-color 0.14s ease;
 }
 
-.vix-nav__link:hover {
+.rix-nav__link:hover {
   color: var(--vp-c-text-1);
   text-decoration: none;
 }
 
-.vix-nav__link.is-active {
+.rix-nav__link.is-active {
   color: var(--vp-c-text-1) !important;
   font-weight: 760 !important;
 }
 
-.vix-nav__link.is-active::after {
+.rix-nav__link.is-active::after {
   content: "";
   display: block;
   position: absolute;
@@ -520,19 +612,10 @@ onBeforeUnmount(() => {
   bottom: -10px;
   height: 2px;
   border-radius: 999px;
-  background: #22c55e;
+  background: var(--rix-accent);
 }
 
-.vix-nav__link {
-  position: relative;
-}
-
-.vix-nav__link.is-active {
-  color: var(--vp-c-text-1) !important;
-  font-weight: 760 !important;
-}
-
-.vix-nav__right {
+.rix-nav__right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -540,8 +623,8 @@ onBeforeUnmount(() => {
   min-width: 0;
 }
 
-.vix-nav__theme,
-.vix-nav__icon {
+.rix-nav__theme,
+.rix-nav__icon {
   display: grid;
   place-items: center;
   width: 32px;
@@ -560,18 +643,18 @@ onBeforeUnmount(() => {
     transform 0.14s ease;
 }
 
-.vix-nav__theme {
+.rix-nav__theme {
   border-radius: 999px;
 }
 
-.vix-nav__theme:hover,
-.vix-nav__icon:hover {
+.rix-nav__theme:hover,
+.rix-nav__icon:hover {
   background: var(--vp-c-bg-alt);
-  border-color: var(--vp-c-text-2);
+  border-color: var(--rix-accent);
   transform: translateY(-1px);
 }
 
-.vix-nav__theme svg {
+.rix-nav__theme svg {
   width: 15px;
   height: 15px;
   stroke: currentColor;
@@ -580,7 +663,7 @@ onBeforeUnmount(() => {
   stroke-linejoin: round;
 }
 
-.vix-nav__social-svg {
+.rix-nav__social-svg {
   display: block;
   width: 17px;
   height: 17px;
@@ -588,11 +671,11 @@ onBeforeUnmount(() => {
   fill: currentColor !important;
 }
 
-.vix-nav__social-svg path {
+.rix-nav__social-svg path {
   fill: currentColor !important;
 }
 
-.vix-nav__search {
+.rix-nav__search {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -606,12 +689,12 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
 }
 
-.vix-nav__search:hover {
+.rix-nav__search:hover {
   background: var(--vp-c-bg-alt);
-  border-color: var(--vp-c-text-2);
+  border-color: var(--rix-accent);
 }
 
-.vix-nav__search svg {
+.rix-nav__search svg {
   width: 17px;
   height: 17px;
   stroke: currentColor;
@@ -620,197 +703,32 @@ onBeforeUnmount(() => {
   stroke-linejoin: round;
 }
 
-.vix-nav__search span {
+.rix-nav__search span {
   font-size: 13px;
   font-weight: 650;
   white-space: nowrap;
 }
 
-.vix-nav__search kbd {
+.rix-nav__search kbd {
   color: var(--vp-c-text-2);
   background: transparent;
   border: 0;
   font-size: 12px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
-.vix-nav__banner a {
-  color: #4ade80 !important;
-  font-weight: 760;
-  text-decoration: underline !important;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 4px;
-  white-space: nowrap;
-}
 
-.vix-nav__banner a:hover {
-  color: #86efac !important;
-  text-decoration: underline !important;
-}
-/* Medium screens */
-@media (max-width: 1180px) {
-  .vix-nav__inner {
-    gap: 18px;
-  }
-
-  .vix-nav__links {
-    gap: 14px;
-  }
-
-  .vix-nav__link {
-    font-size: 13px;
-  }
-
-  .vix-nav__search span {
-    display: none;
-  }
-}
-
-/* Tablet */
-@media (max-width: 980px) {
-  .vix-nav__bar {
-    height: auto;
-    min-height: 58px;
-  }
-
-  .vix-nav__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 14px;
-    padding: 12px 14px;
-  }
-
-  .vix-nav__brand {
-    order: 1;
-    flex: 1 1 auto;
-  }
-
-  .vix-nav__right {
-    order: 2;
-    flex: 0 0 auto;
-  }
-
-  .vix-nav__links {
-    order: 3;
-    flex: 1 1 100%;
-    width: 100%;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 4px 0 2px;
-    scrollbar-width: none;
-  }
-
-  .vix-nav__links::-webkit-scrollbar {
-    display: none;
-  }
-
-  .vix-nav__link {
-    padding: 8px 10px;
-    background: var(--vp-c-bg-soft);
-    border: 1px solid var(--vp-c-divider);
-    border-radius: 999px;
-    font-size: 12.5px;
-    flex-shrink: 0;
-  }
-
-  .vix-nav__search {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .vix-nav__search kbd {
-    display: none;
-  }
-}
-
-/* Mobile */
-@media (max-width: 640px) {
-  .vix-nav__banner {
-    justify-content: flex-start;
-    min-height: 38px;
-    padding: 8px 44px 8px 12px;
-    font-size: 11.5px;
-    text-align: left;
-  }
-
-  .vix-nav__banner-mark {
-    width: 19px;
-    height: 19px;
-  }
-
-  .vix-nav__banner-mark svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .vix-nav__banner-close {
-    right: 10px;
-    width: 28px;
-    height: 28px;
-  }
-
-  .vix-nav__inner {
-    padding: 10px 12px;
-  }
-
-  .vix-nav__brand-name {
-    font-size: 15.5px;
-    font-weight: 780;
-  }
-
-  .vix-nav__slash,
-  .vix-nav__docs {
-    display: none;
-  }
-
-  .vix-nav__theme,
-  .vix-nav__icon,
-  .vix-nav__search {
-    width: 30px;
-    height: 30px;
-  }
-
-  .vix-nav__right {
-    gap: 6px;
-  }
-}
-
-/* Small mobile */
-@media (max-width: 420px) {
-  .vix-nav__banner {
-    gap: 4px;
-    font-size: 11px;
-  }
-
-  .vix-nav__banner a {
-    max-width: 96px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .vix-nav__inner {
-    gap: 8px;
-  }
-
-  .vix-nav__link {
-    padding: 7px 9px;
-    font-size: 12px;
-  }
-}
 /* ============================================================
-   Vix.cpp docs footer
+   Rix docs footer
    ============================================================ */
 
-.vix-footer {
+.rix-footer {
   position: relative;
   flex-shrink: 0;
   border-top: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg);
 }
 
-.vix-footer-inner {
+.rix-footer-inner {
   max-width: 1180px;
   margin: 0 auto;
   padding: 18px 32px 14px;
@@ -820,11 +738,11 @@ onBeforeUnmount(() => {
   gap: 24px;
 }
 
-.vix-footer-brand {
+.rix-footer-brand {
   min-width: 0;
 }
 
-.vix-footer-name {
+.rix-footer-name {
   display: block;
   font-size: 13px;
   line-height: 1.3;
@@ -833,7 +751,7 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1);
 }
 
-.vix-footer-desc {
+.rix-footer-desc {
   display: block;
   margin-top: 3px;
   font-size: 12px;
@@ -842,7 +760,7 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-2);
 }
 
-.vix-footer-nav {
+.rix-footer-nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -850,7 +768,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
 }
 
-.vix-footer-link {
+.rix-footer-link {
   font-size: 12px;
   line-height: 1.4;
   font-weight: 600;
@@ -859,12 +777,12 @@ onBeforeUnmount(() => {
   transition: color 0.12s ease;
 }
 
-.vix-footer-link:hover {
+.rix-footer-link:hover {
   color: var(--vp-c-text-1);
   text-decoration: none;
 }
 
-.vix-footer-meta {
+.rix-footer-meta {
   position: relative;
   max-width: 1180px;
   margin: 0 auto;
@@ -881,25 +799,45 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-2);
 }
 
-.vix-footer-meta::before {
+.rix-footer-meta::before {
   content: "";
   position: absolute;
   top: 0;
-  left: calc(-1 * var(--vix-doc-sidebar-width, 300px));
+  left: calc(-1 * var(--rix-doc-sidebar-width, 300px));
   right: 0;
   height: 1px;
   background: var(--vp-c-divider);
 }
 
+/* Medium screens */
+@media (max-width: 1180px) {
+  .rix-nav__inner {
+    gap: 18px;
+  }
+
+  .rix-nav__links {
+    gap: 14px;
+  }
+
+  .rix-nav__link {
+    font-size: 13px;
+  }
+
+  .rix-nav__search span {
+    display: none;
+  }
+}
+
+/* Desktop footer alignment with VitePress sidebar */
 @media (min-width: 960px) {
-  .vix-footer {
+  .rix-footer {
     margin-left: 0 !important;
-    padding-left: var(--vix-doc-sidebar-width, 300px);
+    padding-left: var(--rix-doc-sidebar-width, 300px);
     border-left: 0 !important;
   }
 
-  .vix-footer-inner,
-  .vix-footer-meta {
+  .rix-footer-inner,
+  .rix-footer-meta {
     max-width: none;
     margin-left: 0;
     margin-right: 0;
@@ -907,129 +845,237 @@ onBeforeUnmount(() => {
 }
 
 @media (min-width: 1440px) {
-  .vix-footer {
-    padding-left: var(--vix-doc-sidebar-width, 320px);
+  .rix-footer {
+    padding-left: var(--rix-doc-sidebar-width, 320px);
   }
 
-  .vix-footer-meta::before {
-    left: calc(-1 * var(--vix-doc-sidebar-width, 320px));
+  .rix-footer-meta::before {
+    left: calc(-1 * var(--rix-doc-sidebar-width, 320px));
   }
 }
 
-@media (max-width: 1180px) {
-  .vix-nav__inner {
-    gap: 24px;
+/* Tablet */
+@media (max-width: 980px) {
+  .rix-nav__bar {
+    height: auto;
+    min-height: 58px;
   }
 
-  .vix-nav__links {
-    gap: 18px;
+  .rix-nav__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    padding: 12px 14px;
   }
 
-  .vix-nav__link {
-    font-size: 14px;
+  .rix-nav__brand {
+    order: 1;
+    flex: 1 1 auto;
   }
 
-  .vix-nav__search span {
+  .rix-nav__right {
+    order: 2;
+    flex: 0 0 auto;
+  }
+
+  .rix-nav__links {
+    order: 3;
+    flex: 1 1 100%;
+    width: 100%;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0 2px;
+    scrollbar-width: none;
+  }
+
+  .rix-nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rix-nav__link {
+    padding: 8px 10px;
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 999px;
+    font-size: 12.5px;
+    flex-shrink: 0;
+  }
+
+  .rix-nav__link.is-active::after {
+    display: none;
+  }
+
+  .rix-nav__link.is-active {
+    border-color: var(--rix-accent);
+    background: var(--rix-accent-soft);
+  }
+
+  .rix-nav__search {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .rix-nav__search kbd {
     display: none;
   }
 }
 
 @media (max-width: 959px) {
-  .vix-nav__banner {
-    height: 40px;
-    justify-content: flex-start;
-    padding: 0 48px 0 16px;
-    font-size: 12px;
-  }
-
-  .vix-nav__bar {
-    height: 58px;
-  }
-
-  .vix-nav__inner {
-    grid-template-columns: auto 1fr auto;
-    gap: 16px;
-    padding: 0 16px;
-  }
-
-  .vix-nav__brand-name {
-    font-size: 16px;
-    font-weight: 750;
-  }
-
-  .vix-nav__slash,
-  .vix-nav__docs,
-  .vix-nav__links,
-  .vix-nav__search {
-    display: none;
-  }
-
-  .vix-nav__right {
-    gap: 8px;
-  }
-
-  .vix-nav__theme,
-  .vix-nav__icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .vix-footer {
+  .rix-footer {
     margin-left: 0 !important;
     padding-left: 0 !important;
     border-left: 0;
   }
 
-  .vix-footer-meta::before {
+  .rix-footer-meta::before {
     left: 0;
   }
 }
 
+/* Mobile */
+@media (max-width: 640px) {
+  .rix-nav__banner {
+    justify-content: flex-start;
+    min-height: 38px;
+    padding: 8px 44px 8px 12px;
+    font-size: 11.5px;
+    text-align: left;
+  }
+
+  .rix-nav__banner-mark {
+    width: 22px;
+    height: 22px;
+  }
+
+  .rix-nav__banner-mark svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .rix-nav__banner-close {
+    right: 10px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .rix-nav__inner {
+    padding: 10px 12px;
+  }
+
+  .rix-nav__brand-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .rix-nav__brand-mark svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .rix-nav__brand-name {
+    font-size: 15.5px;
+    font-weight: 780;
+  }
+
+  .rix-nav__slash,
+  .rix-nav__docs {
+    display: none;
+  }
+
+  .rix-nav__theme,
+  .rix-nav__icon,
+  .rix-nav__search {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rix-nav__right {
+    gap: 6px;
+  }
+}
+
 @media (max-width: 760px) {
-  .vix-footer-inner {
+  .rix-footer-inner {
     grid-template-columns: 1fr;
     gap: 14px;
     padding: 16px 18px 12px;
   }
 
-  .vix-footer-nav {
+  .rix-footer-nav {
     justify-content: flex-start;
     gap: 14px;
   }
 
-  .vix-footer-meta {
+  .rix-footer-meta {
     padding: 10px 18px 14px;
     gap: 10px;
   }
 }
 
-@media (max-width: 520px) {
-  .vix-nav__banner {
+/* Small mobile */
+@media (max-width: 420px) {
+  .rix-nav__banner {
     gap: 4px;
-    padding: 0 42px 0 12px;
-    font-size: 11.5px;
+    font-size: 11px;
   }
 
-  .vix-nav__banner a {
-    display: inline-flex;
-    color: #ffffff;
-    font-weight: 750;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    white-space: nowrap;
+  .rix-nav__banner a {
+    max-width: 116px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rix-nav__inner {
+    gap: 8px;
+  }
+
+  .rix-nav__link {
+    padding: 7px 9px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 460px) {
-  .vix-footer-nav {
+  .rix-footer-nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
   }
 
-  .vix-footer-meta {
+  .rix-footer-meta {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+.rix-doc-shell {
+  padding-top: 118px;
+}
+
+body.rix-banner-hidden .rix-doc-shell {
+  padding-top: 78px;
+}
+
+@media (max-width: 980px) {
+  .rix-doc-shell {
+    padding-top: 132px;
+  }
+
+  body.rix-banner-hidden .rix-doc-shell {
+    padding-top: 92px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rix-doc-shell {
+    padding-top: 122px;
+  }
+
+  body.rix-banner-hidden .rix-doc-shell {
+    padding-top: 84px;
   }
 }
 </style>

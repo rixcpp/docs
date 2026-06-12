@@ -1,5 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import "./custom.css";
+import "./rix-overrides.css";
+import "./home.css";
 
 import Layout from "./Layout.vue";
 import DocsHomeHero from "./DocsHomeHero.vue";
@@ -38,16 +40,21 @@ export default {
     // Custom header layout sync
     // ──────────────────────────────────────────────
     const syncVixHeaderHeight = () => {
-      const header = document.querySelector(".vix-nav");
+      const header = document.querySelector(".rix-nav, .vix-nav");
       if (!header) return;
 
       const height = Math.ceil(header.getBoundingClientRect().height);
+
       document.documentElement.style.setProperty(
         "--vix-header-height",
         `${height}px`,
       );
-    };
 
+      document.documentElement.style.setProperty(
+        "--rix-header-height",
+        `${height}px`,
+      );
+    };
     window.addEventListener("load", syncVixHeaderHeight);
     window.addEventListener("resize", syncVixHeaderHeight);
 

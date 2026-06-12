@@ -1,152 +1,253 @@
 <script setup>
 import CodeBlock from "./CodeBlock.vue";
 
-const heroCode = `#include <vix.hpp>
-using namespace vix;
+const heroCode = `#include <rix.hpp>
 
-int main() {
-  App app;
+int main(){
+  auto auth = rix.auth.memory();
+  auto user = auth.register_user({"ada@example.com","password"});
+  if (user.failed()){
+    rix.debug.eprint("auth failed");
+    return 1;
+  }
 
-  app.get("/", [](Request&, Response& res) {
-    res.json({"message", "Hello from Vix.cpp"});
-  });
+  auto login = auth.login({"ada@example.com", "password"});
+  if (login.ok()){
+    rix.debug.print("signed in:", login.value().user.email());
+  }
 
-  app.get("/ping", [](Request&, Response& res) {
-    res.send("pong");
-  });
-
-  app.run(8080);
+  return 0;
 }`;
 
 const features = [
   {
-    title: "HTTP APIs",
-    desc: "Clean routing, middleware, and JSON serialization with zero overhead.",
-    icon: "swap",
-    href: "/api/http",
-    tag: "Core",
+    title: "Unified facade",
+    desc: "One clean rix.* entry point for the userland packages you install.",
+    icon: "facade",
+    href: "/guides/facade",
+    tag: "API",
   },
   {
-    title: "WebSockets",
-    desc: "Real-time bidirectional communication, built for production workloads.",
-    icon: "bolt",
-    href: "/api/websocket",
-    tag: "Realtime",
+    title: "Independent packages",
+    desc: "Use csv, debug, auth, pdf, and future packages without pulling the full layer.",
+    icon: "packages",
+    href: "/packages/",
+    tag: "Packages",
   },
   {
-    title: "Async Runtime",
-    desc: "Timers, background jobs, and concurrent tasks — one unified model.",
-    icon: "chip",
-    href: "/api/async",
-    tag: "Async",
+    title: "Built on Vix.cpp",
+    desc: "Rix does not replace Vix. It adds application-level libraries on top of it.",
+    icon: "runtime",
+    href: "/guides/rix-and-vix",
+    tag: "Vix",
   },
   {
-    title: "Local-first",
-    desc: "Applications that keep working under unstable networks and failure conditions.",
-    icon: "p2p",
-    href: "/book/18-offline-first-sync",
-    tag: "Sync",
+    title: "Stable naming",
+    desc: "Every package follows the same model: @rix/name, <rix/name.hpp>, rix.name.",
+    icon: "naming",
+    href: "/guides/package-rules",
+    tag: "Design",
   },
 ];
 
 function iconPath(name) {
-  if (name === "swap")   return "M7 7h11l-2-2m2 2l-2 2M17 17H6l2 2m-2-2l2-2";
-  if (name === "bolt")   return "M13 2L4 14h7l-1 8 9-12h-7l1-8z";
-  if (name === "chip")   return "M9 9h6v6H9V9zm-5 3h2m12 0h2M12 4v2m0 12v2M6.5 6.5l1.4 1.4m8.2 8.2l1.4 1.4m0-12.4l-1.4 1.4M7.9 16.1l-1.4 1.4";
-  return "M6 12a2 2 0 114 0 2 2 0 01-4 0zm8-6a2 2 0 114 0 2 2 0 01-4 0zm0 12a2 2 0 114 0 2 2 0 01-4 0zM10 12l4-6M10 12l4 6";
+  if (name === "facade") {
+    return "M5 7h14M5 12h14M5 17h14";
+  }
+
+  if (name === "packages") {
+    return "M4 7l8-4 8 4-8 4-8-4zm0 5l8 4 8-4M4 17l8 4 8-4";
+  }
+
+  if (name === "runtime") {
+    return "M12 3v4m0 10v4M3 12h4m10 0h4M6.3 6.3l2.8 2.8m5.8 5.8 2.8 2.8m0-11.4-2.8 2.8m-5.8 5.8-2.8 2.8";
+  }
+
+  return "M6 7h12M6 12h12M6 17h8";
 }
 </script>
 
 <template>
-  <!-- ── Hero ── -->
-  <div class="vdh">
-    <div class="vdh-left">
-      <div class="vdh-eyebrow">
-        <span class="vdh-badge">v2.5.5</span>
-        <span class="vdh-sep">·</span>
-        <span>MIT · Open source</span>
+  <div class="rdh">
+    <div class="rdh-left">
+      <div class="rdh-eyebrow">
+        <span class="rdh-logo" aria-hidden="true">
+          <svg
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <radialGradient id="rdh-logo-bg" cx="50%" cy="42%" r="70%">
+                <stop offset="0%" stop-color="#141922" />
+                <stop offset="58%" stop-color="#080B10" />
+                <stop offset="100%" stop-color="#030509" />
+              </radialGradient>
+
+              <linearGradient
+                id="rdh-logo-white"
+                x1="18"
+                y1="17"
+                x2="47"
+                y2="48"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#e9eef5" />
+              </linearGradient>
+
+              <linearGradient
+                id="rdh-logo-blue"
+                x1="28"
+                y1="24"
+                x2="37"
+                y2="33"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0%" stop-color="#1684ff" />
+                <stop offset="100%" stop-color="#0061ff" />
+              </linearGradient>
+            </defs>
+
+            <rect width="64" height="64" rx="16" fill="url(#rdh-logo-bg)" />
+
+            <g
+              stroke="url(#rdh-logo-white)"
+              stroke-width="5.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M23 21H36.5C43 21 48 25.8 48 32.2C48 36.4 45.8 40 42.4 42.2"
+              />
+              <path d="M21.5 37L40.5 46.2" />
+              <path d="M18 45L28.5 50" />
+            </g>
+
+            <circle cx="32.3" cy="30.8" r="4.2" fill="url(#rdh-logo-blue)" />
+          </svg>
+        </span>
+
+        <span class="rdh-badge">Rix</span>
+        <span class="rdh-sep">·</span>
+        <span>Official Vix.cpp userland packages</span>
       </div>
 
-      <h1 class="vdh-h1">
-        Build C++ apps<br class="vdh-br"/>
-        that ship fast.
+      <h1 class="rdh-h1">
+        The userland layer<br class="rdh-br" />
+        for Vix.cpp projects.
       </h1>
 
-      <p class="vdh-lead">
-        Learn how to build HTTP APIs, WebSocket services, async tasks,
-        and local-first systems with Vix.cpp, a modern C++ runtime focused
-        on clarity and predictable performance.
+      <p class="rdh-lead">
+        Rix brings application-level packages to Vix.cpp: utilities,
+        authentication, documents, data tools, developer helpers, and more. Vix
+        stays focused on the runtime, CLI, build workflow, registry, and core
+        foundations.
       </p>
-
-      <div class="vdh-actions">
-        <a class="vdh-btn vdh-btn--primary" href="/book/01-introduction">
-          Get started
+      <div class="rdh-actions">
+        <a class="rdh-btn rdh-btn--primary" href="/guides/getting-started">
+          Start with Rix
           <svg viewBox="0 0 16 16" width="14" height="14" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </a>
-        <a class="vdh-btn vdh-btn--ghost" href="https://github.com/vixcpp/vix" target="_blank" rel="noreferrer">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.2 9.2 0 0 1 12 7.07c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.5-.01 2.84 0 .27.18.59.69.48A10.04 10.04 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
-          GitHub
+
+        <a
+          class="rdh-btn rdh-btn--ghost"
+          href="https://registry.vixcpp.com/browse"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Browse packages
         </a>
       </div>
 
-      <div class="vdh-stats">
-        <div class="vdh-stat">
-          <div class="vdh-stat-v">135+</div>
-          <div class="vdh-stat-l">Registry packages</div>
+      <div class="rdh-model">
+        <div class="rdh-model-item">
+          <span class="rdh-model-k">Vix</span>
+          <span class="rdh-model-v">runtime, CLI, build workflow</span>
         </div>
-        <div class="vdh-stat-div"></div>
-        <div class="vdh-stat">
-          <div class="vdh-stat-v">C++20</div>
-          <div class="vdh-stat-l">Minimum standard</div>
+
+        <div class="rdh-model-arrow">→</div>
+
+        <div class="rdh-model-item">
+          <span class="rdh-model-k">Rix</span>
+          <span class="rdh-model-v">userland libraries and facade</span>
         </div>
-        <div class="vdh-stat-div"></div>
-        <div class="vdh-stat">
-          <div class="vdh-stat-v">MIT</div>
-          <div class="vdh-stat-l">Open source</div>
+
+        <div class="rdh-model-arrow">→</div>
+
+        <div class="rdh-model-item">
+          <span class="rdh-model-k">Registry</span>
+          <span class="rdh-model-v">package metadata and versions</span>
         </div>
       </div>
     </div>
 
-    <div class="vdh-right">
-      <div class="vdh-code-label">Quick start</div>
+    <div class="rdh-right">
       <CodeBlock
         title="main.cpp"
         lang="cpp"
-        :chips="['http', 'json']"
+        :chips="['rix', 'csv', 'debug', 'pdf']"
         :code="heroCode"
-        :maxHeight="400"
+        :maxHeight="480"
       />
-      <div class="vdh-run">
-        <span class="vdh-run-prompt">$</span>
-        <span class="vdh-run-cmd">vix run main.cpp</span>
-        <span class="vdh-run-comment"># compiles &amp; runs</span>
+
+      <div class="rdh-terminal">
+        <div class="rdh-terminal-line">
+          <span class="rdh-run-prompt">$</span>
+          <span class="rdh-run-cmd">vix add @rix/rix</span>
+        </div>
+
+        <div class="rdh-terminal-line">
+          <span class="rdh-run-prompt">$</span>
+          <span class="rdh-run-cmd">vix install</span>
+        </div>
+
+        <div class="rdh-terminal-line">
+          <span class="rdh-run-prompt">$</span>
+          <span class="rdh-run-cmd">vix run main.cpp</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── Feature cards ── -->
-  <div class="vdh-cards">
-    <a
-      v-for="f in features"
-      :key="f.title"
-      class="vdh-card"
-      :href="f.href"
-    >
-      <div class="vdh-card-top">
-        <div class="vdh-card-icon">
+  <div class="rdh-cards">
+    <a v-for="f in features" :key="f.title" class="rdh-card" :href="f.href">
+      <div class="rdh-card-top">
+        <div class="rdh-card-icon">
           <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-            <path :d="iconPath(f.icon)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              :d="iconPath(f.icon)"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
-        <span class="vdh-card-tag">{{ f.tag }}</span>
+
+        <span class="rdh-card-tag">{{ f.tag }}</span>
       </div>
-      <div class="vdh-card-title">{{ f.title }}</div>
-      <div class="vdh-card-desc">{{ f.desc }}</div>
-      <div class="vdh-card-arrow">
+
+      <div class="rdh-card-title">{{ f.title }}</div>
+      <div class="rdh-card-desc">{{ f.desc }}</div>
+
+      <div class="rdh-card-arrow">
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path
+            d="M3 8h10M9 4l4 4-4 4"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </div>
     </a>
@@ -154,316 +255,445 @@ function iconPath(name) {
 </template>
 
 <style scoped>
-/* ── Tokens ── */
-.vdh {
-  --accent: #22c55e;
-  --accent-d: #16a34a;
-  --accent-s: rgba(34, 197, 94, .12);
-  --accent-b: rgba(34, 197, 94, .25);
+.rdh {
+  --accent: #0061ff;
+  --accent-light: #1684ff;
+  --accent-soft: rgba(0, 97, 255, 0.12);
+  --accent-border: rgba(0, 97, 255, 0.28);
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 52px;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.92fr);
+  gap: 56px;
   align-items: start;
-  padding: 20px 0 40px;
+  padding: 24px 0 42px;
 }
 
-/* ── Left ── */
-.vdh-left { display: flex; flex-direction: column; gap: 0; }
+.rdh-left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
 
-.vdh-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12.5px; font-weight: 600;
+.rdh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
   color: var(--vp-c-text-2);
-  margin-bottom: 16px;
+  font-size: 12.5px;
+  font-weight: 650;
 }
 
-.vdh-badge {
-  display: inline-flex; align-items: center;
-  padding: 3px 9px; border-radius: 999px;
-  font-size: 11.5px; font-weight: 700;
-  background: var(--accent-s);
-  border: 1px solid var(--accent-b);
-  color: var(--accent);
+.rdh-logo {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.vdh-sep { color: var(--vp-c-divider); }
+.rdh-logo svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+}
 
-.vdh-h1 {
+.rdh-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: var(--accent-light);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  font-size: 11.5px;
+  font-weight: 800;
+}
+
+.rdh-sep {
+  color: var(--vp-c-divider);
+}
+
+.rdh-h1 {
   margin: 0 0 18px;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.06;
-  letter-spacing: -0.03em;
-  font-weight: 900;
   color: var(--vp-c-text-1);
+  font-size: clamp(2.15rem, 4.2vw, 3.35rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 920;
 }
 
-.vdh-br { display: block; }
+.rdh-br {
+  display: block;
+}
 
-.vdh-lead {
-  margin: 0 0 24px;
-  font-size: 15.5px;
-  line-height: 1.72;
+.rdh-lead {
+  max-width: 54ch;
+  margin: 0 0 26px;
   color: var(--vp-c-text-2);
-  max-width: 46ch;
+  font-size: 15.8px;
+  line-height: 1.75;
 }
 
-/* CTAs */
-.vdh-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-
-.vdh-btn {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 9px 16px; border-radius: 10px;
-  font-size: 13.5px; font-weight: 700; text-decoration: none;
-  transition: all .14s ease;
-}
-
-.vdh-btn--primary {
-  background: var(--accent);
-  color: #052e16;
-  box-shadow: 0 4px 14px rgba(34,197,94,.30);
-}
-.vdh-btn--primary:hover {
-  background: #4ade80;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(34,197,94,.40);
-}
-
-.vdh-btn--ghost {
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-}
-.vdh-btn--ghost:hover {
-  border-color: var(--accent-b);
-  background: var(--accent-s);
-}
-
-/* Stats */
-.vdh-stats {
-  display: flex; align-items: center; gap: 20px;
+.rdh-actions {
+  display: flex;
+  gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 28px;
 }
 
-.vdh-stat { display: flex; flex-direction: column; gap: 3px; }
-.vdh-stat-v { font-size: 17px; font-weight: 900; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
-.vdh-stat-l { font-size: 11.5px; font-weight: 600; color: var(--vp-c-text-2); }
-.vdh-stat-div { width: 1px; height: 28px; background: var(--vp-c-divider); }
-
-/* ── Right ── */
-.vdh-right { display: flex; flex-direction: column; gap: 10px; }
-
-.vdh-code-label {
-  font-size: 11.5px; font-weight: 700; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--vp-c-text-2);
-}
-
-.vdh-run {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 14px; border-radius: 10px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 13px;
-}
-
-.vdh-run-prompt { color: var(--accent); font-weight: 800; }
-.vdh-run-cmd    { color: var(--vp-c-text-1); font-weight: 700; }
-.vdh-run-comment{ color: var(--vp-c-text-2); font-size: 12px; margin-left: auto; }
-
-/* ── Feature cards ── */
-.vdh-cards {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  padding-bottom: 8px;
-}
-
-.vdh-card {
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 16px; border-radius: 14px;
-  border: 1px solid var(--vp-c-divider);
-  background: transparent;
-  text-decoration: none;
-  color: var(--vp-c-text-1);
-  transition: border-color .14s, transform .14s, background .14s;
-  position: relative;
-}
-
-.vdh-card:hover {
-  border-color: var(--accent-b);
-  background: var(--accent-s);
-  transform: translateY(-2px);
-}
-
-.vdh-card-top {
-  display: flex; align-items: center;
-  justify-content: space-between; gap: 8px;
-  margin-bottom: 4px;
-}
-
-.vdh-card-icon {
-  width: 34px; height: 34px; border-radius: 10px;
-  display: grid; place-items: center;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-2);
-  transition: border-color .14s, color .14s;
-}
-.vdh-card:hover .vdh-card-icon {
-  border-color: var(--accent-b);
-  color: var(--accent);
-}
-
-.vdh-card-tag {
-  font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--accent);
-  background: var(--accent-s); border: 1px solid var(--accent-b);
-  padding: 2px 8px; border-radius: 999px;
-  opacity: 0; transition: opacity .14s;
-}
-.vdh-card:hover .vdh-card-tag { opacity: 1; }
-
-.vdh-card-title {
-  font-size: 14px; font-weight: 800; color: var(--vp-c-text-1);
-  line-height: 1.2;
-}
-
-.vdh-card-desc {
-  font-size: 12.5px; line-height: 1.6; color: var(--vp-c-text-2);
-  flex: 1;
-}
-
-.vdh-card-arrow {
-  display: flex; align-items: center;
-  color: var(--vp-c-text-2);
-  opacity: 0; transform: translateX(-4px);
-  transition: opacity .14s, transform .14s;
-}
-.vdh-card:hover .vdh-card-arrow {
-  opacity: 1; transform: translateX(0);
-  color: var(--accent);
-}
-
-/* CTA buttons final override */
-.vdh-actions .vdh-btn {
-  text-decoration: none !important;
-}
-
-.vdh-actions .vdh-btn--primary {
-  background: var(--accent) !important;
-  color: #052e16 !important;
-  border: 1px solid rgba(34, 197, 94, .45) !important;
-  box-shadow: 0 10px 26px rgba(34, 197, 94, .24) !important;
-}
-
-.vdh-actions .vdh-btn--primary:hover {
-  background: #4ade80 !important;
-  color: #052e16 !important;
-  border-color: rgba(74, 222, 128, .60) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 14px 34px rgba(34, 197, 94, .32) !important;
-}
-
-.vdh-actions .vdh-btn--ghost {
-  background: rgba(255, 255, 255, .035) !important;
-  color: var(--vp-c-text-1) !important;
-  border: 1px solid var(--vp-c-divider) !important;
-  box-shadow: none !important;
-}
-
-.vdh-actions .vdh-btn--ghost:hover {
-  background: var(--accent-s) !important;
-  color: var(--accent) !important;
-  border-color: var(--accent-b) !important;
-  transform: translateY(-1px);
-}
-.vdh-btn {
+.rdh-btn {
   min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
   padding: 9px 16px;
-  border-radius: 10px;
+  border-radius: 11px;
   font-size: 13.5px;
-  font-weight: 800;
+  font-weight: 820;
   line-height: 1;
   text-decoration: none !important;
-  transition: background .14s ease, color .14s ease, border-color .14s ease, transform .14s ease, box-shadow .14s ease;
+  transition:
+    background 0.14s ease,
+    color 0.14s ease,
+    border-color 0.14s ease,
+    transform 0.14s ease,
+    box-shadow 0.14s ease;
 }
 
-/* ── Responsive ── */
+.rdh-btn--primary {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, var(--accent-light), var(--accent));
+  border: 1px solid rgba(22, 132, 255, 0.45);
+  box-shadow: 0 14px 34px rgba(0, 97, 255, 0.28);
+}
+
+.rdh-btn--primary:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 42px rgba(0, 97, 255, 0.36);
+}
+
+.rdh-btn--ghost {
+  color: var(--vp-c-text-1) !important;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.rdh-btn--ghost:hover {
+  color: var(--accent-light) !important;
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  transform: translateY(-1px);
+}
+
+.rdh-model {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 10px;
+  max-width: 760px;
+}
+
+.rdh-model-item {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--vp-c-bg-soft);
+}
+
+.rdh-model-k {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  font-weight: 860;
+  letter-spacing: -0.02em;
+}
+
+.rdh-model-v {
+  display: block;
+  color: var(--vp-c-text-2);
+  font-size: 11.5px;
+  line-height: 1.45;
+  font-weight: 560;
+}
+
+.rdh-model-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-light);
+  font-weight: 900;
+  opacity: 0.9;
+}
+
+.rdh-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.rdh-code-label {
+  color: var(--vp-c-text-2);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.rdh-run {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 14px;
+  border-radius: 11px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  font-family:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  font-size: 13px;
+}
+
+.rdh-run-prompt {
+  color: var(--accent-light);
+  font-weight: 900;
+}
+
+.rdh-run-cmd {
+  min-width: 0;
+  color: var(--vp-c-text-1);
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.rdh-run-comment {
+  margin-left: auto;
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.rdh-cards {
+  --accent: #0061ff;
+  --accent-light: #1684ff;
+  --accent-soft: rgba(0, 97, 255, 0.12);
+  --accent-border: rgba(0, 97, 255, 0.28);
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: 8px;
+}
+
+.rdh-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--vp-c-divider);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent), transparent;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition:
+    border-color 0.14s ease,
+    transform 0.14s ease,
+    background 0.14s ease;
+}
+
+.rdh-card:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.rdh-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.rdh-card-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  transition:
+    border-color 0.14s ease,
+    color 0.14s ease,
+    background 0.14s ease;
+}
+
+.rdh-card:hover .rdh-card-icon {
+  color: var(--accent-light);
+  border-color: var(--accent-border);
+  background: rgba(0, 97, 255, 0.08);
+}
+
+.rdh-card-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: var(--accent-light);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.14s ease;
+}
+
+.rdh-card:hover .rdh-card-tag {
+  opacity: 1;
+}
+
+.rdh-card-title {
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.rdh-card-desc {
+  flex: 1;
+  color: var(--vp-c-text-2);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.rdh-card-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--vp-c-text-2);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.14s ease,
+    transform 0.14s ease,
+    color 0.14s ease;
+}
+
+.rdh-card:hover .rdh-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--accent-light);
+}
+
 @media (max-width: 1100px) {
-  .vdh-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rdh {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .rdh-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 960px) {
-  .vdh {
-    grid-template-columns: 1fr;
-    gap: 28px;
+  .rdh {
     padding-top: 12px;
   }
-  .vdh-h1 { font-size: 2.2rem; }
-  .vdh-br { display: none; }
-  .vdh-lead { max-width: 100%; }
-  .vdh-run-comment { display: none; }
+
+  .rdh-h1 {
+    font-size: 2.25rem;
+  }
+
+  .rdh-br {
+    display: none;
+  }
+
+  .rdh-lead {
+    max-width: 100%;
+  }
+
+  .rdh-run-comment {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .rdh-model {
+    grid-template-columns: 1fr;
+  }
+
+  .rdh-model-arrow {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
-  .vdh-h1 { font-size: 1.85rem; }
-  .vdh-lead { font-size: 14.5px; }
-  .vdh-cards { grid-template-columns: 1fr; gap: 10px; }
-  .vdh-stats { gap: 14px; }
-  .vdh-stat-div { display: none; }
-  .vdh-card-tag { opacity: 1; }
-  .vdh-card-arrow { opacity: 1; transform: translateX(0); }
-}
-
-@media (max-width: 640px) {
-  .vdh {
+  .rdh {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
   }
 
-  .vdh-left,
-  .vdh-right {
+  .rdh-left,
+  .rdh-right {
     width: 100%;
     max-width: 100%;
     min-width: 0;
   }
 
-  .vdh-right :deep(.code-block),
-  .vdh-right :deep(.vix-code-block),
-  .vdh-right :deep(pre),
-  .vdh-right :deep(code) {
+  .rdh-h1 {
+    font-size: 1.9rem;
+  }
+
+  .rdh-lead {
+    font-size: 14.5px;
+  }
+
+  .rdh-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .rdh-card-tag,
+  .rdh-card-arrow {
+    opacity: 1;
+  }
+
+  .rdh-card-arrow {
+    transform: translateX(0);
+  }
+
+  .rdh-right :deep(.code-block),
+  .rdh-right :deep(.vix-code-block),
+  .rdh-right :deep(pre),
+  .rdh-right :deep(code) {
     max-width: 100%;
     min-width: 0;
   }
 
-  .vdh-right :deep(pre) {
+  .rdh-right :deep(pre) {
     overflow-x: auto;
   }
 
-  .vdh-run {
+  .rdh-run {
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
     white-space: nowrap;
   }
 }
-.vdh-btn--primary {
-  background: var(--accent);
-  color: #052e16;
-  box-shadow: 0 4px 14px rgba(34,197,94,.30);
-}
-
-.vdh-btn--primary:hover {
-  background: #4ade80;
-  color: #052e16;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(34,197,94,.40);
-}
-
 </style>

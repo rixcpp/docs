@@ -1,0 +1,665 @@
+/* ============================================================
+   Rix overrides
+   Loaded after the main docs stylesheet.
+   This file converts the existing Vix documentation skin into
+   a Rix identity without rewriting the base CSS.
+   ============================================================ */
+
+:root {
+  --rix-accent: #0061ff;
+  --rix-accent-light: #1684ff;
+  --rix-accent-soft: rgba(0, 97, 255, 0.12);
+  --rix-accent-border: rgba(0, 97, 255, 0.28);
+
+  /* Keep old Vix variables alive, but remap them to Rix. */
+  --vix-accent: var(--rix-accent-light);
+  --vix-accent-d: #5ea8ff;
+  --vix-accent-s: var(--rix-accent-soft);
+  --vix-accent-b: var(--rix-accent-border);
+}
+
+/* ============================================================
+   Theme colors
+   ============================================================ */
+
+html.dark {
+  --vp-c-brand-1: #5ea8ff;
+  --vp-c-brand-2: #1684ff;
+  --vp-c-brand-3: #0061ff;
+}
+
+html:not(.dark) {
+  --vp-c-brand-1: #0052d9;
+  --vp-c-brand-2: #0061ff;
+  --vp-c-brand-3: #1684ff;
+}
+
+/* ============================================================
+   Selection
+   ============================================================ */
+
+::selection {
+  background: rgba(0, 97, 255, 0.22) !important;
+  color: inherit;
+}
+
+html.dark ::selection {
+  background: rgba(22, 132, 255, 0.28) !important;
+}
+
+/* ============================================================
+   Links
+   ============================================================ */
+
+.vp-doc a {
+  color: var(--rix-accent-light) !important;
+}
+
+.vp-doc a:hover {
+  color: #5ea8ff !important;
+}
+
+html.dark .vp-doc a {
+  color: #5ea8ff !important;
+}
+
+html.dark .vp-doc a:hover {
+  color: #93c5fd !important;
+}
+
+/* ============================================================
+   Sidebar active / hover states
+   ============================================================ */
+
+.VPSidebarItem .link:hover {
+  background: var(--rix-accent-soft) !important;
+  color: var(--rix-accent-light) !important;
+}
+
+.VPSidebarItem.is-active > .item > .link,
+.VPSidebarItem.is-active > .item .link {
+  color: var(--rix-accent-light) !important;
+  background: var(--rix-accent-soft) !important;
+}
+
+.VPSidebarItem.is-active .text,
+.VPSidebarItem.has-active .text {
+  color: var(--rix-accent-light) !important;
+}
+
+/* Scrollbar */
+@media (min-width: 961px) {
+  .VPSidebar,
+  .VPSidebar .content,
+  .VPSidebar .nav {
+    scrollbar-color: rgba(0, 97, 255, 0.38) transparent !important;
+  }
+
+  .VPSidebar::-webkit-scrollbar-thumb,
+  .VPSidebar .content::-webkit-scrollbar-thumb,
+  .VPSidebar .nav::-webkit-scrollbar-thumb {
+    background: rgba(0, 97, 255, 0.32) !important;
+  }
+
+  .VPSidebar::-webkit-scrollbar-thumb:hover,
+  .VPSidebar .content::-webkit-scrollbar-thumb:hover,
+  .VPSidebar .nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(22, 132, 255, 0.58) !important;
+  }
+}
+
+/* ============================================================
+   Outline / right table of contents
+   ============================================================ */
+
+.VPDocAside .outline-link.active {
+  color: var(--rix-accent-light) !important;
+}
+
+.VPDocAsideOutline .content {
+  border-left-color: var(--vp-c-divider) !important;
+}
+
+/* ============================================================
+   Buttons, cards, pager links
+   ============================================================ */
+
+.VPDocFooter .pager-link:hover {
+  border-color: var(--rix-accent-border) !important;
+  background: var(--rix-accent-soft) !important;
+  box-shadow: none !important;
+}
+
+.vp-doc .tip {
+  border-color: var(--rix-accent-border) !important;
+  background: var(--rix-accent-soft) !important;
+}
+
+.vp-doc blockquote {
+  border-left-color: var(--rix-accent-light) !important;
+  background: var(--rix-accent-soft) !important;
+}
+
+/* ============================================================
+   Code blocks
+   ============================================================ */
+
+.vp-doc div[class*="language-"]:hover,
+.vp-doc [class*="language-"]:hover {
+  border-color: var(--rix-accent-border) !important;
+  box-shadow: none !important;
+}
+
+.vp-doc [class*="language-"] > button.copy:hover {
+  background-color: rgba(0, 97, 255, 0.16) !important;
+  border-color: var(--rix-accent-border) !important;
+}
+
+.vp-doc [class*="language-"] > button.copy:hover::before {
+  background-color: #5ea8ff !important;
+}
+
+.vp-doc [class*="language-"] > button.copy.copied::before {
+  background-color: var(--rix-accent-light) !important;
+}
+
+.vp-doc pre::-webkit-scrollbar-thumb {
+  background: rgba(0, 97, 255, 0.34) !important;
+}
+
+.vp-doc pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 132, 255, 0.58) !important;
+}
+
+/* Shell prompt token */
+.vp-doc .cb-sh-prompt,
+.cb .cb-sh-prompt,
+code span.cb-sh-prompt {
+  color: var(--rix-accent-light) !important;
+}
+
+/* URLs and namespaces */
+.vp-doc .cb-url,
+.cb .cb-url,
+code span.cb-url,
+.vp-doc .cb-sh-url,
+.cb .cb-sh-url,
+code span.cb-sh-url,
+.vp-doc .cb-ns,
+.cb .cb-ns,
+code span.cb-ns {
+  color: #5ea8ff !important;
+}
+
+/* ============================================================
+   Search
+   ============================================================ */
+
+.VPNavBarSearch .VPNavBarSearchButton:hover,
+.VPNavBarSearch .DocSearch-Button:hover {
+  border-color: var(--rix-accent-border) !important;
+  background: var(--rix-accent-soft) !important;
+}
+
+.DocSearch-Hit[aria-selected="true"] a,
+.VPLocalSearchBox .result:hover {
+  background: var(--rix-accent-soft) !important;
+}
+
+/* ============================================================
+   Rix custom header support
+   These selectors mirror the old .vix-* behavior, but for .rix-*.
+   ============================================================ */
+
+:root {
+  --rix-header-height: 101px;
+  --rix-header-gap: 28px;
+
+  --rix-header-with-banner: 101px;
+  --rix-header-without-banner: 60px;
+  --rix-current-header-height: var(--rix-header-with-banner);
+}
+
+body.rix-banner-visible {
+  --rix-current-header-height: var(--rix-header-with-banner);
+}
+
+body.rix-banner-hidden {
+  --rix-current-header-height: var(--rix-header-without-banner);
+}
+
+/* The old CSS may still depend on Vix variables.
+   Mirror Rix values into the old variable names. */
+body.rix-banner-visible,
+body.rix-banner-hidden {
+  --vix-current-header-height: var(--rix-current-header-height);
+  --vix-header-height: var(--rix-header-height);
+  --vix-header-gap: var(--rix-header-gap);
+}
+
+/* Main shell */
+.rix-doc-shell {
+  padding-top: var(--rix-header-height) !important;
+  background: var(--vp-c-bg) !important;
+}
+
+/* If the layout still uses the old shell class, keep it working. */
+.vix-doc-shell {
+  padding-top: var(--rix-header-height) !important;
+}
+
+/* Content spacing */
+.VPContent,
+.VPContent.has-sidebar {
+  padding-top: var(--rix-header-gap) !important;
+}
+
+.VPDoc,
+.VPDoc .container {
+  padding-top: 0 !important;
+}
+
+/* Desktop sidebar and aside */
+@media (min-width: 960px) {
+  .VPSidebar {
+    top: var(--rix-header-height) !important;
+    height: calc(100vh - var(--rix-header-height)) !important;
+  }
+
+  .VPSidebar .content {
+    height: 100% !important;
+    padding-top: 18px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .VPSidebar .nav {
+    height: calc(100vh - var(--rix-header-height) - 42px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .VPDocAside {
+    top: calc(var(--rix-header-height) + 28px) !important;
+    height: calc(100vh - var(--rix-header-height) - 28px) !important;
+  }
+
+  .VPDocAside .content {
+    padding-top: 0 !important;
+  }
+}
+
+/* ============================================================
+   Mobile header behavior for Rix
+   ============================================================ */
+
+@media (max-width: 959px) {
+  :root {
+    --rix-mobile-banner-height: 38px;
+    --rix-mobile-local-nav-height: 48px;
+    --rix-header-gap: 18px;
+  }
+
+  .rix-nav {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 10000 !important;
+    width: 100% !important;
+    background: var(--vp-c-bg) !important;
+  }
+
+  .rix-nav__banner {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10020 !important;
+    min-height: var(--rix-mobile-banner-height) !important;
+    height: var(--rix-mobile-banner-height) !important;
+    padding: 0 44px 0 12px !important;
+    background: var(--vp-c-bg) !important;
+    border-bottom: 1px solid var(--vp-c-divider) !important;
+  }
+
+  body.rix-banner-visible .rix-nav {
+    padding-top: var(--rix-mobile-banner-height) !important;
+  }
+
+  body.rix-banner-hidden .rix-nav {
+    padding-top: 0 !important;
+  }
+
+  body.rix-banner-hidden .rix-nav__banner {
+    display: none !important;
+  }
+
+  .rix-nav__bar {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 58px !important;
+    background: var(--vp-c-bg) !important;
+  }
+
+  .rix-doc-shell,
+  .vix-doc-shell {
+    padding-top: 0 !important;
+  }
+
+  .VPLocalNav {
+    position: fixed !important;
+    top: var(--rix-mobile-banner-height) !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10010 !important;
+    height: var(--rix-mobile-local-nav-height) !important;
+    background: var(--vp-c-bg) !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid var(--vp-c-divider) !important;
+    box-shadow: none !important;
+  }
+
+  body.rix-banner-hidden .VPLocalNav {
+    top: 0 !important;
+  }
+
+  .VPLocalNav .container,
+  .VPLocalNav .items,
+  .VPLocalNav .menu,
+  .VPLocalNav .outline {
+    height: var(--rix-mobile-local-nav-height) !important;
+    background: var(--vp-c-bg) !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .VPLocalNav .menu,
+  .VPLocalNav .outline {
+    display: flex !important;
+    align-items: center !important;
+    color: var(--vp-c-text-1) !important;
+    font-size: 13px !important;
+    font-weight: 650 !important;
+  }
+
+  .VPContent,
+  .VPContent.has-sidebar {
+    padding-top: calc(var(--rix-mobile-local-nav-height) + 18px) !important;
+  }
+
+  .VPSidebar {
+    position: fixed !important;
+    top: calc(
+      var(--rix-mobile-banner-height) + var(--rix-mobile-local-nav-height)
+    ) !important;
+    height: calc(
+      100vh - var(--rix-mobile-banner-height) -
+        var(--rix-mobile-local-nav-height)
+    ) !important;
+    z-index: 10000 !important;
+    background: var(--vp-c-bg) !important;
+  }
+
+  body.rix-banner-hidden .VPSidebar {
+    top: var(--rix-mobile-local-nav-height) !important;
+    height: calc(100vh - var(--rix-mobile-local-nav-height)) !important;
+  }
+
+  .VPSidebar .curtain,
+  .VPSidebar .content,
+  .VPSidebar .nav {
+    background: var(--vp-c-bg) !important;
+  }
+
+  .VPSidebar .content {
+    height: 100% !important;
+    padding-top: 12px !important;
+    padding-bottom: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .VPSidebar .nav {
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --rix-mobile-banner-height: 36px;
+    --rix-mobile-local-nav-height: 46px;
+  }
+
+  .rix-nav__banner {
+    font-size: 11px !important;
+  }
+
+  .VPLocalNav .menu,
+  .VPLocalNav .outline {
+    font-size: 12.5px !important;
+  }
+}
+
+/* ============================================================
+   Legacy cleanup
+   If some old Vix classes are still rendered, make them look Rix.
+   ============================================================ */
+
+.vix-nav__banner a,
+.rix-nav__banner a {
+  color: var(--rix-accent-light) !important;
+}
+
+.vix-nav__banner a:hover,
+.rix-nav__banner a:hover {
+  color: #5ea8ff !important;
+}
+
+.vix-nav__link.is-active::after,
+.rix-nav__link.is-active::after {
+  background: var(--rix-accent) !important;
+}
+
+.vix-nav__search:hover,
+.vix-nav__theme:hover,
+.vix-nav__icon:hover,
+.rix-nav__search:hover,
+.rix-nav__theme:hover,
+.rix-nav__icon:hover {
+  border-color: var(--rix-accent-border) !important;
+}
+
+/* Old green accents in hero/cards if still present */
+.vdh,
+.rdh {
+  --accent: var(--rix-accent);
+  --accent-d: var(--rix-accent-light);
+  --accent-s: var(--rix-accent-soft);
+  --accent-b: var(--rix-accent-border);
+}
+
+/* ============================================================
+   Final green cleanup
+   Any remaining Vix green interaction becomes Rix blue.
+   ============================================================ */
+
+[style*="#22c55e"],
+[style*="#4ade80"],
+[style*="#86efac"] {
+  color: var(--rix-accent-light) !important;
+}
+/* ============================================================
+   Rix global color override
+   Must be the LAST block in rix-overrides.css
+   ============================================================ */
+
+:root {
+  --rix-blue: #0061ff;
+  --rix-blue-light: #1684ff;
+  --rix-blue-soft: rgba(0, 97, 255, 0.12);
+  --rix-blue-border: rgba(0, 97, 255, 0.32);
+
+  --vix-accent: var(--rix-blue-light) !important;
+  --vix-accent-d: #5ea8ff !important;
+  --vix-accent-s: var(--rix-blue-soft) !important;
+  --vix-accent-b: var(--rix-blue-border) !important;
+
+  --vp-c-brand-1: var(--rix-blue-light) !important;
+  --vp-c-brand-2: var(--rix-blue) !important;
+  --vp-c-brand-3: #004fd1 !important;
+  --vp-c-brand-soft: var(--rix-blue-soft) !important;
+}
+
+html.dark {
+  --vp-c-bg: #0f1115 !important;
+  --vp-c-bg-soft: #151821 !important;
+  --vp-c-bg-alt: #1a1f2b !important;
+  --vp-c-divider: rgba(255, 255, 255, 0.12) !important;
+  --vp-c-text-1: rgba(255, 255, 255, 0.94) !important;
+  --vp-c-text-2: rgba(255, 255, 255, 0.68) !important;
+}
+
+html:not(.dark) {
+  --vp-c-bg: #ffffff !important;
+  --vp-c-bg-soft: #f6f8fc !important;
+  --vp-c-bg-alt: #eef3ff !important;
+  --vp-c-divider: rgba(0, 0, 0, 0.12) !important;
+  --vp-c-text-1: #111827 !important;
+  --vp-c-text-2: #4b5563 !important;
+}
+
+/* Links */
+.vp-doc a,
+.VPLink,
+.VPNavBarMenuLink.active,
+.VPNavBarMenuLink.active > a {
+  color: var(--rix-blue-light) !important;
+}
+
+.vp-doc a:hover,
+.VPLink:hover {
+  color: #5ea8ff !important;
+}
+
+/* Sidebar */
+.VPSidebarItem .link:hover,
+.VPSidebarItem.is-active > .item > .link,
+.VPSidebarItem.is-active > .item .link {
+  color: var(--rix-blue-light) !important;
+  background: var(--rix-blue-soft) !important;
+}
+
+.VPSidebarItem.is-active .text,
+.VPSidebarItem.has-active .text {
+  color: var(--rix-blue-light) !important;
+}
+
+/* Right outline */
+.VPDocAside .outline-link.active {
+  color: var(--rix-blue-light) !important;
+}
+
+/* Buttons / pager */
+.VPDocFooter .pager-link:hover,
+.VPNavBarSearch .VPNavBarSearchButton:hover,
+.VPNavBarSearch .DocSearch-Button:hover {
+  border-color: var(--rix-blue-border) !important;
+  background: var(--rix-blue-soft) !important;
+}
+
+/* Callouts and quotes */
+.vp-doc blockquote,
+.vp-doc .tip {
+  border-color: var(--rix-blue-border) !important;
+  border-left-color: var(--rix-blue-light) !important;
+  background: var(--rix-blue-soft) !important;
+}
+
+/* Code block interactions */
+.vp-doc div[class*="language-"]:hover,
+.vp-doc [class*="language-"]:hover {
+  border-color: var(--rix-blue-border) !important;
+}
+
+.vp-doc [class*="language-"] > button.copy:hover {
+  background-color: rgba(0, 97, 255, 0.16) !important;
+  border-color: var(--rix-blue-border) !important;
+}
+
+.vp-doc [class*="language-"] > button.copy:hover::before,
+.vp-doc [class*="language-"] > button.copy.copied::before {
+  background-color: var(--rix-blue-light) !important;
+}
+
+/* Scrollbars */
+.vp-doc pre::-webkit-scrollbar-thumb,
+.VPSidebar::-webkit-scrollbar-thumb,
+.VPSidebar .content::-webkit-scrollbar-thumb,
+.VPSidebar .nav::-webkit-scrollbar-thumb {
+  background: rgba(0, 97, 255, 0.34) !important;
+}
+
+.vp-doc pre::-webkit-scrollbar-thumb:hover,
+.VPSidebar::-webkit-scrollbar-thumb:hover,
+.VPSidebar .content::-webkit-scrollbar-thumb:hover,
+.VPSidebar .nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 132, 255, 0.62) !important;
+}
+
+/* Shell prompt and highlighted tokens */
+.vp-doc .cb-sh-prompt,
+.cb .cb-sh-prompt,
+code span.cb-sh-prompt,
+.vp-doc .cb-url,
+.cb .cb-url,
+code span.cb-url,
+.vp-doc .cb-sh-url,
+.cb .cb-sh-url,
+code span.cb-sh-url,
+.vp-doc .cb-ns,
+.cb .cb-ns,
+code span.cb-ns {
+  color: var(--rix-blue-light) !important;
+}
+
+/* Home and custom components still using old accent vars */
+.rdh,
+.vdh,
+.rdh-cards,
+.vdh-cards {
+  --accent: var(--rix-blue) !important;
+  --accent-d: var(--rix-blue-light) !important;
+  --accent-s: var(--rix-blue-soft) !important;
+  --accent-b: var(--rix-blue-border) !important;
+}
+
+/* Custom Rix/Vix header */
+.rix-nav__banner a,
+.vix-nav__banner a,
+.rix-nav__link.is-active,
+.vix-nav__link.is-active {
+  color: var(--rix-blue-light) !important;
+}
+
+.rix-nav__link.is-active::after,
+.vix-nav__link.is-active::after {
+  background: var(--rix-blue) !important;
+}
+
+.rix-nav__search:hover,
+.rix-nav__theme:hover,
+.rix-nav__icon:hover,
+.vix-nav__search:hover,
+.vix-nav__theme:hover,
+.vix-nav__icon:hover {
+  border-color: var(--rix-blue-border) !important;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(0, 97, 255, 0.24) !important;
+  color: inherit !important;
+}

@@ -1,0 +1,568 @@
+/* ============================================================
+   Rix home overrides
+   Fixes the landing page without rewriting the component.
+   Must be loaded after style.css and rix-overrides.css.
+   ============================================================ */
+
+/* Page containing the Rix home hero */
+.VPDoc:has(.rdh) {
+  padding-top: 0 !important;
+}
+
+.VPDoc:has(.rdh) .container {
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.VPDoc:has(.rdh) .content,
+.VPDoc:has(.rdh) .content-container,
+.VPDoc:has(.rdh) .vp-doc {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Clean Rix background */
+.VPDoc:has(.rdh) {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(0, 97, 255, 0.14), transparent 28%),
+    radial-gradient(
+      circle at 82% 14%,
+      rgba(22, 132, 255, 0.08),
+      transparent 24%
+    ),
+    var(--vp-c-bg) !important;
+}
+
+html.dark .VPDoc:has(.rdh) {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(0, 97, 255, 0.18), transparent 30%),
+    radial-gradient(
+      circle at 82% 14%,
+      rgba(22, 132, 255, 0.1),
+      transparent 26%
+    ),
+    #0f1115 !important;
+}
+
+/* Main hero layout */
+.rdh {
+  width: min(100%, 1320px) !important;
+  margin: 0 auto !important;
+  padding: 58px 28px 52px !important;
+  grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr) !important;
+  gap: 56px !important;
+  align-items: center !important;
+}
+
+/* Left side should never be clipped */
+.rdh-left {
+  min-width: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Smaller, sharper headline */
+.rdh-h1 {
+  max-width: 720px !important;
+  margin-bottom: 20px !important;
+  font-size: clamp(2.15rem, 4.2vw, 3.65rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.045em !important;
+  font-weight: 850 !important;
+}
+
+.rdh-lead {
+  max-width: 62ch !important;
+  font-size: 15.5px !important;
+  line-height: 1.72 !important;
+}
+
+/* Better paragraph rhythm */
+.rdh-lead {
+  max-width: 58ch !important;
+  font-size: 16px !important;
+  line-height: 1.72 !important;
+  color: var(--vp-c-text-2) !important;
+}
+
+/* Eyebrow spacing */
+.rdh-eyebrow {
+  margin-bottom: 20px !important;
+}
+
+/* Buttons */
+.rdh-actions {
+  margin-top: 2px !important;
+  margin-bottom: 28px !important;
+}
+
+.rdh-btn {
+  border-radius: 10px !important;
+  font-size: 13px !important;
+}
+
+.rdh-btn--primary {
+  background: linear-gradient(180deg, #1684ff, #0061ff) !important;
+  box-shadow: 0 12px 28px rgba(0, 97, 255, 0.3) !important;
+}
+
+.rdh-btn--ghost {
+  background: rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Model row: make it cleaner and less heavy */
+.rdh-model {
+  max-width: 720px !important;
+  gap: 8px !important;
+}
+
+.rdh-model-item {
+  padding: 12px 14px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html:not(.dark) .rdh-model-item {
+  background: rgba(0, 0, 0, 0.025) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.rdh-model-k {
+  font-size: 12.5px !important;
+}
+
+.rdh-model-v {
+  font-size: 11.2px !important;
+}
+
+/* Right side code block */
+.rdh-right {
+  min-width: 0 !important;
+}
+
+.rdh-code-label {
+  margin-left: 2px !important;
+  color: var(--vp-c-text-2) !important;
+}
+
+/* Make the code area less dominant */
+.rdh-right :deep(.code-block),
+.rdh-right :deep(.vix-code-block),
+.rdh-right :deep(.cb) {
+  border-radius: 14px !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.24) !important;
+}
+
+.rdh-right :deep(pre) {
+  max-height: 360px !important;
+}
+
+/* Terminal rows */
+.rdh-run {
+  min-height: 44px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  border-color: rgba(255, 255, 255, 0.11) !important;
+}
+
+html:not(.dark) .rdh-run {
+  background: rgba(0, 0, 0, 0.035) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.rdh-run-prompt {
+  color: #1684ff !important;
+}
+
+/* Feature cards */
+.rdh-cards {
+  width: min(100%, 1320px) !important;
+  margin: 0 auto !important;
+  padding: 0 28px 60px !important;
+  gap: 14px !important;
+}
+
+.rdh-card {
+  min-height: 168px !important;
+  padding: 18px !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(255, 255, 255, 0.018) !important;
+  border-color: rgba(255, 255, 255, 0.11) !important;
+}
+
+html:not(.dark) .rdh-card {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.025), transparent),
+    rgba(0, 0, 0, 0.015) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.rdh-card:hover {
+  background: rgba(0, 97, 255, 0.1) !important;
+  border-color: rgba(22, 132, 255, 0.38) !important;
+  transform: translateY(-2px) !important;
+}
+
+.rdh-card-icon {
+  border-radius: 10px !important;
+}
+
+.rdh-card-title {
+  font-size: 15px !important;
+}
+
+.rdh-card-desc {
+  font-size: 13px !important;
+  line-height: 1.58 !important;
+}
+
+/* Avoid VitePress doc typography from touching the home hero */
+.VPDoc:has(.rdh) .vp-doc p {
+  margin: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 1180px) {
+  .rdh {
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+    padding-top: 44px !important;
+  }
+
+  .rdh-h1 {
+    max-width: 900px !important;
+  }
+
+  .rdh-lead {
+    max-width: 72ch !important;
+  }
+
+  .rdh-right {
+    max-width: 900px !important;
+  }
+
+  .rdh-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .rdh {
+    padding: 34px 18px 36px !important;
+  }
+
+  .rdh-h1 {
+    font-size: clamp(2.1rem, 12vw, 3.1rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .rdh-lead {
+    font-size: 14.8px !important;
+  }
+
+  .rdh-model {
+    grid-template-columns: 1fr !important;
+  }
+
+  .rdh-model-arrow {
+    display: none !important;
+  }
+
+  .rdh-cards {
+    grid-template-columns: 1fr !important;
+    padding: 0 18px 44px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .rdh {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .rdh-h1 {
+    font-size: 2.15rem !important;
+  }
+
+  .rdh-actions {
+    flex-direction: column !important;
+  }
+
+  .rdh-btn {
+    width: 100% !important;
+  }
+
+  .rdh-cards {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+@media (max-width: 720px) {
+  .rdh-h1 {
+    font-size: clamp(2rem, 9.5vw, 2.75rem) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .rdh-lead {
+    font-size: 14.8px !important;
+    line-height: 1.68 !important;
+  }
+}
+@media (max-width: 480px) {
+  .rdh-h1 {
+    font-size: 2rem !important;
+    line-height: 1.08 !important;
+  }
+}
+/* ============================================================
+   Rix home cleanup
+   ============================================================ */
+
+.rdh-eyebrow {
+  display: none !important;
+}
+
+.rdh {
+  padding-top: 44px !important;
+}
+.rdh-terminal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: rgba(255, 255, 255, 0.035);
+  font-family:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  font-size: 13px;
+}
+
+html:not(.dark) .rdh-terminal {
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.rdh-terminal-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.rdh-terminal .rdh-run-prompt {
+  color: #1684ff;
+  font-weight: 900;
+}
+
+.rdh-terminal .rdh-run-cmd {
+  color: var(--vp-c-text-1);
+  font-weight: 760;
+}
+/* ============================================================
+   Rix home — flat cards and terminal
+   Must be the LAST block in home.css
+   ============================================================ */
+
+.rdh-model-item,
+.rdh-card,
+.rdh-terminal,
+.rdh-run {
+  background: #12151b !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  box-shadow: none !important;
+}
+
+html:not(.dark) .rdh-model-item,
+html:not(.dark) .rdh-card,
+html:not(.dark) .rdh-terminal,
+html:not(.dark) .rdh-run {
+  background: #f7f9fc !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+}
+
+/* Code block container on the home hero */
+.rdh-right :deep(.code-block),
+.rdh-right :deep(.vix-code-block),
+.rdh-right :deep(.cb) {
+  background: #0d1117 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+html:not(.dark) .rdh-right :deep(.code-block),
+html:not(.dark) .rdh-right :deep(.vix-code-block),
+html:not(.dark) .rdh-right :deep(.cb) {
+  background: #f7f9fc !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+}
+
+/* Hover: keep it quiet, no strong glow */
+.rdh-model-item:hover,
+.rdh-card:hover,
+.rdh-terminal:hover,
+.rdh-run:hover {
+  background: #151a22 !important;
+  border-color: rgba(22, 132, 255, 0.28) !important;
+  box-shadow: none !important;
+}
+
+html:not(.dark) .rdh-model-item:hover,
+html:not(.dark) .rdh-card:hover,
+html:not(.dark) .rdh-terminal:hover,
+html:not(.dark) .rdh-run:hover {
+  background: #eef3ff !important;
+  border-color: rgba(0, 97, 255, 0.22) !important;
+  box-shadow: none !important;
+}
+
+/* Feature cards should not look like heavy panels */
+.rdh-card {
+  min-height: 150px !important;
+  border-radius: 14px !important;
+  padding: 18px !important;
+}
+
+.rdh-card:hover {
+  transform: translateY(-1px) !important;
+}
+
+/* Small model boxes */
+.rdh-model-item {
+  border-radius: 12px !important;
+}
+
+/* Terminal block */
+.rdh-terminal {
+  border-radius: 12px !important;
+  padding: 13px 15px !important;
+}
+
+/* Remove old gradients if any previous rule added them */
+.rdh-card,
+.rdh-model-item {
+  background-image: none !important;
+}
+/* ============================================================
+   Rix home title readability fix
+   Must be the LAST title override in home.css
+   ============================================================ */
+
+.rdh-h1 {
+  max-width: 720px !important;
+  margin-bottom: 26px !important;
+
+  font-size: clamp(2.3rem, 4vw, 3.55rem) !important;
+  line-height: 1.14 !important;
+  letter-spacing: -0.035em !important;
+  font-weight: 760 !important;
+
+  color: rgba(255, 255, 255, 0.94) !important;
+}
+
+.rdh-lead {
+  max-width: 64ch !important;
+  margin-bottom: 30px !important;
+
+  font-size: 16px !important;
+  line-height: 1.82 !important;
+  font-weight: 450 !important;
+
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+html:not(.dark) .rdh-h1 {
+  color: #111827 !important;
+}
+
+html:not(.dark) .rdh-lead {
+  color: #374151 !important;
+}
+
+@media (max-width: 720px) {
+  .rdh-h1 {
+    font-size: clamp(2rem, 8.5vw, 2.75rem) !important;
+    line-height: 1.16 !important;
+    letter-spacing: -0.025em !important;
+    font-weight: 760 !important;
+  }
+
+  .rdh-lead {
+    font-size: 15px !important;
+    line-height: 1.76 !important;
+  }
+}
+/* ============================================================
+   Rix home boxes — active style by default
+   Must be the LAST block in home.css
+   ============================================================ */
+
+.rdh-model-item,
+.rdh-card {
+  background: rgba(0, 97, 255, 0.1) !important;
+  border-color: rgba(22, 132, 255, 0.38) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Same style on hover, no visual jump */
+.rdh-model-item:hover,
+.rdh-card:hover {
+  background: rgba(0, 97, 255, 0.1) !important;
+  border-color: rgba(22, 132, 255, 0.38) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Icons also stay in their active state */
+.rdh-card-icon {
+  color: #1684ff !important;
+  border-color: rgba(22, 132, 255, 0.38) !important;
+  background: rgba(0, 97, 255, 0.08) !important;
+}
+
+.rdh-card:hover .rdh-card-icon {
+  color: #1684ff !important;
+  border-color: rgba(22, 132, 255, 0.38) !important;
+  background: rgba(0, 97, 255, 0.08) !important;
+}
+
+/* Tags and arrows visible by default */
+.rdh-card-tag,
+.rdh-card-arrow {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+.rdh-card-arrow {
+  color: #1684ff !important;
+}
+
+.rdh-card:hover .rdh-card-tag,
+.rdh-card:hover .rdh-card-arrow {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Light mode */
+html:not(.dark) .rdh-model-item,
+html:not(.dark) .rdh-card {
+  background: rgba(0, 97, 255, 0.08) !important;
+  border-color: rgba(0, 97, 255, 0.22) !important;
+}
+
+html:not(.dark) .rdh-model-item:hover,
+html:not(.dark) .rdh-card:hover {
+  background: rgba(0, 97, 255, 0.08) !important;
+  border-color: rgba(0, 97, 255, 0.22) !important;
+}

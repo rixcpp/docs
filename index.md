@@ -1,12 +1,10 @@
 ---
-title: Vix.cpp Documentation
+title: Rix Documentation
 layout: false
 ---
 
 <script setup>
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  window.location.replace('/getting-started/')
-})
+import DocsHomeHero from './.vitepress/theme/DocsHomeHero.vue'
 </script>
+
+<DocsHomeHero />

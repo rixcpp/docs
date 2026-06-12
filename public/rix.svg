@@ -1,0 +1,53 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Rix Logo Mark</title>
+  <desc>Minimal abstract Rix logo mark for the Vix.cpp ecosystem.</desc>
+
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#141922"/>
+      <stop offset="58%" stop-color="#080B10"/>
+      <stop offset="100%" stop-color="#030509"/>
+    </radialGradient>
+
+    <filter id="softShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="20" flood-color="#000000" flood-opacity="0.42"/>
+    </filter>
+
+    <linearGradient id="whiteMark" x1="280" y1="275" x2="740" y2="735" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E9EEF5"/>
+    </linearGradient>
+
+    <linearGradient id="blueDot" x1="455" y1="390" x2="580" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1684FF"/>
+      <stop offset="100%" stop-color="#0061FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+
+  <g filter="url(#softShadow)" stroke="url(#whiteMark)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Main rounded R-like arc -->
+    <path
+      d="M354 330
+         H570
+         C670 330 744 404 744 504
+         C744 570 710 628 658 662"
+      stroke-width="82"/>
+
+    <!-- Upper diagonal modular stroke -->
+    <path
+      d="M325 590
+         L626 735"
+      stroke-width="82"/>
+
+    <!-- Lower diagonal modular stroke -->
+    <path
+      d="M270 716
+         L430 794"
+      stroke-width="82"/>
+  </g>
+
+  <!-- Blue identity dot -->
+  <circle cx="514" cy="486" r="56" fill="url(#blueDot)"/>
+</svg>
